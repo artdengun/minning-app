@@ -1,0 +1,62 @@
+{% extends "layouts/index.html" %}
+
+{% block title %} Portfolio Detail {% endblock %}
+
+{% block content %}
+    <!-- Page Title -->
+    <div class="page-title dark-background">
+      <div class="container d-lg-flex justify-content-between align-items-center">
+        <h1 class="mb-2 mb-lg-0">Ant Algorithm Analytic</h1>
+        <nav class="breadcrumbs">
+          <ol>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="index.html">Home</a></li>
+            <li class="current">Proses Data</li>
+          </ol>
+        </nav>
+      </div>
+    </div><!-- End Page Title -->
+
+    <br>
+    <!-- Portfolio Table -->
+    <section id="portfolio-table" class="portfolio-table">
+      <div class="container-fluid" data-aos="fade-up" data-aos-delay="400">
+        <h3 class="text-center">Project Tasks</h3>
+        <!-- Make the table responsive -->
+        <div class="table-responsive">
+          <table id="datatable" class="table table-striped">
+            <thead>
+              <tr>
+                <th>Task</th>
+                <th>Assigned To</th>
+                <th>Deadline</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Design Website</td>
+                <td>John Doe</td>
+                <td>01/04/2020</td>
+                <td>Completed</td>
+              </tr>
+              <tr>
+                <td>Develop Features</td>
+                <td>Jane Smith</td>
+                <td>15/04/2020</td>
+                <td>In Progress</td>
+              </tr>
+              <tr>
+                <td>Test the Project</td>
+                <td>Mary Johnson</td>
+                <td>30/04/2020</td>
+                <td>Not Started</td>
+              </tr>
+              <!-- Add more rows as necessary -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+{% endblock %}
