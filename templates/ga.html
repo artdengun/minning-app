@@ -1,0 +1,59 @@
+{% extends "layouts/index.html" %}
+
+{% block title %} Genetic Algorithm {% endblock %}
+
+{% block content %}
+    <!-- Page Title -->
+    <div class="page-title dark-background">
+      <div class="container d-lg-flex justify-content-between align-items-center">
+        <h1 class="mb-2 mb-lg-0">Genetic Algorithm (GA)</h1>
+        <nav class="breadcrumbs">
+          <ol>
+            <li><a href="/">Home</a></li>
+            <li class="current">GA</li>
+          </ol>
+        </nav>
+      </div>
+    </div><!-- End Page Title -->
+
+    <br>
+    <!-- Portfolio Table -->
+    <section id="portfolio-table" class="portfolio-table">
+      <div class="container-fluid" data-aos="fade-up" data-aos-delay="400">
+        <h3 class="text-center">Ant Result Analytic</h3>
+        <hr>
+        <!-- Make the table responsive -->
+        <div class="table-responsive">
+          <table id="datatable" class="table table-striped" >
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Distance X CM</th>
+                <th>Distance Y CM</th>
+                <th>Goods Received KG</th>
+                <th>Estimated Time</th>
+                <th>Lead Time</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tbody>
+                {% for row in table_data %}
+                <tr>
+                  <td>{{ row.name }}</td>
+                  <td>{{ row.distance_x_cm }}</td>
+                  <td>{{ row.distance_y_cm }}</td>
+                  <td>{{ row.goods_received_kg }}</td>
+                  <td>{{ row.estimated_time }}</td>
+                  <td>{{ row.lead_time }}</td>
+                </tr>
+                {% endfor %}
+              </tbody>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <hr>
+      </div>
+    </section>
+
+{% endblock %}

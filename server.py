@@ -1,6 +1,7 @@
 from app import app 
 from flask import Flask, render_template, url_for, redirect, request
-
+from flask_sqlalchemy import SQLAlchemy
+from flask_migrate import Migrate
 
 app = Flask(__name__)
 
@@ -9,8 +10,11 @@ app = Flask(__name__)
 def index():
     return render_template("layouts/index.html")
 
+@app.route("/genetic-algorithm")
+def generic_algo():
+    return render_template("ga.html")
 
-@app.route('/ant-algorithm-analytic')
+@app.route('/ant-colony-optimization')
 def data():
     table_data = [
         {"name": "Design Website", "distance_x": 20, "distance_y": 15, "goods_received": 50, 
@@ -20,6 +24,7 @@ def data():
          "estimated_time": "2h", "lead_time": "3h"},
     ]
     return render_template("ant.html", table_data=table_data)
+
 
 @app.route('/ant-algorithm-analytic/proses-ant')
 def ant():
