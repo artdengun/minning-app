@@ -20,35 +20,35 @@
     <!-- Portfolio Table -->
     <section id="portfolio-table" class="portfolio-table">
       <div class="container-fluid" data-aos="fade-up" data-aos-delay="400">
-        <h3 class="text-center">Ant Result Analytic</h3>
+        <h3 class="text-center">Ant Colony Optimization</h3>
         <hr>
+
         <!-- Make the table responsive -->
         <div class="table-responsive">
-          <table id="datatable" class="table table-striped" >
+          <table id="datatable" class="table table-striped table-bordered">
             <thead>
               <tr>
+                <th>No</th>
                 <th>Name</th>
-                <th>Distance X CM</th>
-                <th>Distance Y CM</th>
-                <th>Goods Received KG</th>
+                <th>Distance X (cm)</th>
+                <th>Distance Y (cm)</th>
+                <th>Goods Received (kg)</th>
                 <th>Estimated Time</th>
                 <th>Lead Time</th>
               </tr>
             </thead>
             <tbody>
-              <tbody>
-                {% for row in table_data %}
-                <tr>
-                  <td>{{ row.name }}</td>
-                  <td>{{ row.distance_x_cm }}</td>
-                  <td>{{ row.distance_y_cm }}</td>
-                  <td>{{ row.goods_received_kg }}</td>
-                  <td>{{ row.estimated_time }}</td>
-                  <td>{{ row.lead_time }}</td>
-                </tr>
-                {% endfor %}
-              </tbody>
+              {% for row in table_data %}
+              <tr>
+                <td>{{ loop.index }}</td>  <!-- Menampilkan nomor urut -->
+                <td>{{ row.name }}</td>
+                <td>{{ row.distance_x_cm }}</td>
+                <td>{{ row.distance_y_cm }}</td>
+                <td>{{ row.goods_received_kg }}</td>
+                <td>{{ row.estimated_time }}</td>
+                <td>{{ row.lead_time }}</td>
               </tr>
+              {% endfor %}
             </tbody>
           </table>
         </div>
