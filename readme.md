@@ -4,3 +4,5 @@
 - pip install Flask-SQLAlchemy
 - pip install flask_login
 - pip install flask_migrate
+- pip install numpy 
+- pip install matplotlib
