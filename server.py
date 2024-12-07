@@ -7,6 +7,7 @@ import matplotlib.pyplot as plt
 import base64
 import io
 from config import Config
+from scipy.spatial.distance import pdist, squareform
 
 # Inisialisasi db dan migrate
 db = SQLAlchemy()
@@ -152,37 +153,41 @@ def proses_generic_algo():
     fitness_curve_base64 = base64.b64encode(buf.read()).decode('utf-8')
     buf.close()
     plt.close()
-
-    # Data titik lokasi
+    
+    # Example data points (use your actual data points from your database)
     x = np.array([9.2, 10, 10, 10.8, 10.2, 10.4, 10, 9.2, 8.6, 8.2, 9.4, 9.4, 9, 10.4, 8.4, 8.4, 7.8, 8, 7.2, 7.6, 10.6, 6.6])
     y = np.array([2.8, 3, 3.6, 3.2, 4.6, 5.4, 5.2, 3.6, 2, 1.2, 0.2, 0.6, 0.8, 0.6, 1, 1.6, 3.2, 3.4, 5.2, 5.4, 7, 5])
 
-    # Plot poin dan jalur utama
-    plt.figure(figsize=(10, 6))
-    plt.scatter(x, y, c='lime', edgecolors='black', s=100, label='Points')
+    # Calculate distance matrix
+    coordinates = np.column_stack((x, y))
+    distance_matrix = squareform(pdist(coordinates))
+
+    # Plot points and routes
+    plt.figure(figsize=(12, 8))
+    plt.scatter(x, y, c='#00fd00', edgecolors='black', s=100, marker='s', label='Points')
+
+    # Label the points
     for i in range(len(x)):
         plt.text(x[i] + 0.1, y[i], f'{i+1}', fontsize=12, ha='left', va='center', color='black')
 
-    purple_path = [1, 3, 5, 7, 18, 22, 1]
-    for i in range(len(purple_path) - 1):
-        start = purple_path[i] - 1
-        end = purple_path[i + 1] - 1
-        plt.plot([x[start], x[end]], [y[start], y[end]], color='purple', lw=2)
+    # Define routes (update these based on your analysis or optimization algorithm)
+    route1 = [1, 3, 5, 7, 18, 22, 1]
+    route2 = [1, 7, 21, 12, 11, 17, 18, 21]
+    route3 = [1, 6, 9, 12, 13, 15, 16, 17, 19, 1]
+    route4 = [1, 2, 4, 8, 10, 14, 20, 1]
 
-    connections = [
-        (1, 2), (1, 4), (1, 6), (1, 8), (8, 9), (9, 10), (10, 11), (11, 12),
-        (12, 13), (13, 14), (14, 15), (15, 16), (16, 17), (17, 18), (18, 19),
-        (19, 20), (20, 21), (21, 22), (22, 17), (7, 5), (5, 20)
-    ]
-    colors = ['blue', 'orange', 'orange', 'orange', 'orange', 'orange',
-              'blue', 'orange', 'blue', 'purple', 'blue', 'purple',
-              'blue', 'orange', 'blue', 'blue', 'orange', 'purple',
-              'purple', 'purple', 'blue']
-    for idx, (start, end) in enumerate(connections):
-        plt.plot([x[start - 1], x[end - 1]], [y[start - 1], y[end - 1]], color=colors[idx], lw=1.5, alpha=0.5)
+    # Plot the paths with different colors
+    paths = [route1, route2, route3, route4]
+    colors = ['purple', '#4f93c2', 'brown', 'orange']  # Assign colors for each path
+    for path, color in zip(paths, colors):
+        for i in range(len(path) - 1):
+            start = path[i] - 1  # Adjust for zero-based index
+            end = path[i + 1] - 1  # Adjust for zero-based index
+            plt.plot([x[start], x[end]], [y[start], y[end]], color=color, lw=2, label=f'Route {paths.index(path) + 1}')
 
     plt.xlabel('X-axis')
     plt.ylabel('Y-axis')
+    plt.title('Paths and Routes Visualization')
     plt.grid(True)
 
     # Simpan grafik ke buffer
