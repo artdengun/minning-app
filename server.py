@@ -82,7 +82,7 @@ class Data(db.Model):
             }
             processed_data.append(processed_entry)
             # data id, data di proses, jumlah semut = distance 
-            locations.append((data.id, data.name, total_distance))  # Tambahkan nama lokasi
+            locations.append((data.id, data.name, total_distance, goods_received, data.estimated_time, data.lead_time))  # Tambahkan nama lokasi
 
         # Implementasi sederhana ACO untuk menemukan rute terbaik
         best_route = None
@@ -113,14 +113,14 @@ class Data(db.Model):
 def index():
     return render_template("layouts/index.html")
 
-@app.route("/genetic-algorithm")
+@app.route("/ant-colony-optimization")
 def generic_algo():
     table_data = Data.get_all()  # Mengambil semua data dari model Data
     print("Template folder path:", table_data)  # Debugging print
     return render_template("ga.html", table_data=table_data)
 
 
-@app.route("/genetic-algorithm/proses-ga")
+@app.route("/ant-colony-optimization/proses-aco")
 def proses_generic_algo():
     # Data simulasi
     iterations = np.arange(1, 501)  # Iterasi dari 1 sampai 500
@@ -171,10 +171,10 @@ def proses_generic_algo():
         plt.text(x[i] + 0.1, y[i], f'{i+1}', fontsize=12, ha='left', va='center', color='black')
 
     # Define routes (update these based on your analysis or optimization algorithm)
-    route1 = [1, 3, 5, 7, 18, 22, 1]
-    route2 = [1, 7, 21, 12, 11, 17, 18, 21]
-    route3 = [1, 6, 9, 12, 13, 15, 16, 17, 19, 1]
-    route4 = [1, 2, 4, 8, 10, 14, 20, 1]
+    route1 = [1,10,15,11,13,16,1]
+    route2 = [1,12,9,17,14,18,1]
+    route3 = [1,22,19,8,20,2,1]
+    route4 = [1, 3, 4, 5, 7, 6, 21 ,1]
 
     # Plot the paths with different colors
     paths = [route1, route2, route3, route4]
@@ -187,7 +187,7 @@ def proses_generic_algo():
 
     plt.xlabel('X-axis')
     plt.ylabel('Y-axis')
-    plt.title('Paths and Routes Visualization')
+    plt.title('Vehicle Routing Problem (VRP)')
     plt.grid(True)
 
     # Simpan grafik ke buffer
@@ -210,23 +210,4 @@ def proses_generic_algo():
         processed_data=processed_data,
         best_route=best_route,
         best_distance=best_distance
-    )
-
-
-@app.route('/ant-colony-optimization')
-def data():
-    table_data = Data.get_all()  # Mengambil semua data dari model Data
-    print("Template folder path:", table_data)  # Debugging print
-    return render_template("ant.html", table_data=table_data)
-
-@app.route('/ant-algorithm-analytic/proses-ant')
-def ant():
-    get_data = Data.get_all()  # Mengambil semua data dari model Data
-    processed_data, best_route, best_distance = Data.process_data()  # Panggil metode pemrosesan
-    return render_template(
-        "proses-ant.html",
-        table_data=get_data,  # Data asli dari database
-        processed_data=processed_data,  # Data yang sudah diproses
-        best_route=best_route,  # Rute terbaik
-        best_distance=best_distance  # Jarak total terbaik
     )
