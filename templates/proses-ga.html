@@ -1,4 +1,4 @@
-{% extends "layouts/index.html" %} {% block title %} Genetic Algorithm {%
+{% extends "layouts/index.html" %} {% block title %} Ant Colony Optimization {%
 endblock %} {% block content %}
 <div class="page-title dark-background">
   <div class="container justify-content-between align-items-center">
@@ -123,10 +123,42 @@ endblock %} {% block content %}
 
   <h2>Vehicle Routing Problem (VRP)</h2>
   <img src="data:image/png;base64,{{ route_graph_base64 }}" />
-  <p>Route 1 (Purple): 1, 10, 15, 11, 13, 16, 1</p>
-  <p>Route 2 (blue): 1, 12, 9, 17, 14, 18, 1</p>
-  <p>Route 3 (brown): 1, 22, 19, 8, 20, 2, 1</p>
-  <p>Route 4 (orange): 1, 3, 4, 5, 7, 6, 21 ,1</p>
+  <div class="table-responsive">
+    <table
+      id="datatable-processed"
+      class="table table-striped table-bordered"
+    >
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Color</th>
+          <th>Best Route</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Ant Route 1</td>
+          <td>Purple</td>
+          <td>1, 10, 15, 11, 13, 16, 1</td>
+        </tr>
+        <tr>
+          <td>Ant Route 2</td>
+          <td>Blue</td>
+          <td>1, 12, 9, 17, 14, 18, 1</td>
+        </tr>
+        <tr>
+          <td>Ant Route 3</td>
+          <td>Brown</td>
+          <td>1, 22, 19, 8, 20, 2, 1</td>
+        </tr>
+        <tr>
+          <td>Ant Route 4</td>
+          <td>Orange</td>
+          <td>1, 3, 4, 5, 7, 6, 21 ,1</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </section>
 
 {% endblock %}
